@@ -13,7 +13,7 @@ Once again, thank you [g-luca](https://github.com/g-luca) for all the top-notch 
 ## 1\. Install
 
 ``` bash
-git clone https://github.com/g-luca/autodelegator.git && cd autodelegator
+git clone git@github.com:ghilloDev/autodelegator.git && cd autodelegator
 ```
 ## 2\. Configuration
 
