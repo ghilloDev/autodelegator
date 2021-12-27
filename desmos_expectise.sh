@@ -10,10 +10,10 @@ set AMOUNT [lindex $argv 7]
 set COMMAND ""
 if { "$MODE" == "w" } {
     set COMMAND "desmos tx distribution withdraw-rewards $VALIDATOR_ADDRESS --commission --from $KEY_NAME --fees ${TRANSACTION_FEES}${CURRENCY} --chain-id $CHAIN_ID --yes"
-    puts "MODE: Withdrawal $COMMAND"
+    puts "MODE: Withdrawal"
 } elseif { "$MODE" == "d" } {
     set COMMAND "desmos tx staking delegate $VALIDATOR_ADDRESS --from $KEY_NAME ${AMOUNT}${CURRENCY} --fees ${TRANSACTION_FEES}${CURRENCY} --chain-id $CHAIN_ID --yes"
-    puts "MODE: Delegator $COMMAND"
+    puts "MODE: Delegator"
 } else  {
         puts "Wrong params. "
         puts "1 param is MODE: w (for withdrawals) or d (for delegations)"
