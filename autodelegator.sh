@@ -11,16 +11,16 @@ MINIMUM_BALANCE=$(awk -F "=" '/MINIMUM_BALANCE/ {gsub(/[ \t]/, "", $2); print $2
 TRANSACTION_FEES=$(awk -F "=" '/TRANSACTION_FEES/ {gsub(/[ \t]/, "", $2); print $2}' $CONFIG_FILE)
 THRESHOLD_MOVEMENT_AMOUNT=$(awk -F "=" '/THRESHOLD_MOVEMENT_AMOUNT/ {gsub(/[ \t]/, "", $2); print $2}' $CONFIG_FILE)
 REFRESH_TIME=$(awk -F "=" '/REFRESH_TIME/ {gsub(/[ \t]/, "", $2); print $2}' $CONFIG_FILE)
-
-echo "Enter Desmos keyring passphrase (just this time, please ignore next output messages since they'll be managed by the bot):"
-read -s PWD
-while true
-do
+./desmos_expectise_worker.sh $VALIDATOR_ADDRESS $KEY_NAME $DELEGATE_ADDRESS $CHAIN_ID $NODE_ADDRESS_PORT $CURRENCY $TRANSACTION_FEES
+echo "EXPECT DONE  bye!"
+exit -1
+#while true
+#do
     AVAILABLE=$(desmos q bank balances $DELEGATE_ADDRESS --node tcp://$NODE_ADDRESS_PORT -o json | jq -r ".balances[0].amount") 
     printf "Actually available %u %s\n" $AVAILABLE $CURRENCY
     echo "WHITDRAW START"
     ./desmos_expectise.sh w $PWD $VALIDATOR_ADDRESS $KEY_NAME $CHAIN_ID $CURRENCY $TRANSACTION_FEES
-    printf "WHITDRAW ENDED, checking new availability\n" 
+    printf "WHITDRAW ENDED ...checking new availability\n" 
     sleep 25
     AVAILABLE=$(desmos q bank balances $DELEGATE_ADDRESS --node tcp://$NODE_ADDRESS_PORT -o json | jq -r ".balances[0].amount") 
     printf "Now available %s \n" $AVAILABLE
@@ -34,4 +34,4 @@ do
     fi 
     printf "DELEGATION ENDED ...go sleeping for %s \n" $REFRESH_TIME
     sleep $REFRESH_TIME
-done
+#done
