@@ -14,7 +14,7 @@ For any suggestion or if you find a bug please open an issue.<br>
 ## 1\. Install
 
 ``` bash
-git clone https://github.com/ghilloDev/autodelegator.git && cd autodelegator && chmod u+x *.sh
+git clone https://github.com/ghilloDev/autodelegator.git && cd autodelegator && chmod u+x autodelegator.sh
 ```
 ## 2\. Configuration
 
